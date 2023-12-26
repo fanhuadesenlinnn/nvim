@@ -13,7 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
-
+-- 打通系统黏贴版
+vim.opt.clipboard = 'unnamedplus'
 
 
 require("lazy").setup({
@@ -64,7 +65,13 @@ require("lazy").setup({
        vim.o.winminwidth = 10
        vim.o.equalalways = false
        require('windows').setup()
-    end
+    end,
+    keys = {
+      { "<C-w>z", "<cmd>WindowsMaximize<cr>"},
+      { "<C-w>_", "<cmd>WindowsMaximizeVertically<cr>"},
+      { "<C-w>|", "<cmd>WindowsMaximizeHorizontally<cr>"},
+      { "<C-w>=", "<cmd>WindowsEqualize<cr>"},
+    },
   },
 
 
@@ -107,7 +114,7 @@ require("lazy").setup({
      event = { "BufReadPre" },
      opts = {
        events = { 'InsertLeave', 'BufLeave' },
-       silent = false,
+       silent = true,
        exclude_ft = { 'neo-tree' },
      },
   },
