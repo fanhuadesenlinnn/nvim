@@ -13,8 +13,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
--- 打通系统黏贴版
-vim.opt.clipboard = 'unnamedplus'
+
+vim.opt.clipboard = 'unnamedplus' -- 打通系统黏贴版
+vim.opt.number = true        -- 显示行号
+-- vim.opt.cursorcolumn = true  -- 高亮当前列
+vim.opt.cursorline = true    -- 光标所在的当前行高亮
+vim.opt.shiftwidth = 4       -- 设置位移宽度为4
+vim.opt.tabstop = 4          -- 设置缩进宽度为4
+vim.opt.expandtab = true     -- 将缩进替换为空格
+vim.opt.scrolloff=10         -- 设置滚动时始终显示上下10行
 
 
 require("lazy").setup({
@@ -90,14 +97,13 @@ require("lazy").setup({
   },
 
 
+  -- 智能补全
+  {"windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
 
-  -- -- 智能补全
-  -- {'ZhiyuanLck/smart-pairs',
-  --   event = 'InsertEnter',
-  --   config = function()
-  --     require('pairs').setup()
-  --   end
-  -- },
 
 
   -- 状态栏
@@ -123,7 +129,13 @@ require("lazy").setup({
   -- 预览行
   {'nacro90/numb.nvim',
     config = function ()
-      require('numb').setup()
+      require('numb').setup({
+        show_numbers = true, -- Enable 'number' for the window while peeking
+        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+        hide_relativenumbers = true, -- Enable turning off 'relativenumber' for the window while peeking
+        number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+        centered_peeking = true, -- Peeked line will be centered relative to window
+      })
     end
   },
 
@@ -132,7 +144,7 @@ require("lazy").setup({
   {'yamatsum/nvim-cursorline',
     cursorline = {
       enable = true,
-      timeout = 10,
+      timeout = 1,
       number = true,
     },
     cursorword = {
@@ -144,7 +156,6 @@ require("lazy").setup({
       require('nvim-cursorline').setup()
     end,
   },
-
 
   -- 九头蛇
   {"anuvyklack/hydra.nvim",
@@ -190,21 +201,32 @@ require("lazy").setup({
 
   -- 自动tab
 
-  -- -- 高度实验性的插件，完全取代了消息、cmdline 和弹出菜单的 UI。
-  -- {"folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     -- add any options here
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
+  -- 高度实验性的插件，完全取代了消息、cmdline 和弹出菜单的 UI。
+  {"folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+        require("noice").setup({
+            cmdline = {
+                view = "cmdline",
+            },
+            popupmenu = {
+                view = "cmdline"
+            },
+
+        })
+    end,
+  },
 
 
   -- 搜索
