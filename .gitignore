@@ -1,4 +1,4 @@
-# Local editor/runtime state
+# 本地编辑器和运行状态
 .DS_Store
 Session.vim
 Sessionx.vim
@@ -7,7 +7,7 @@ Sessionx.vim
 .tmp/
 tmp/
 
-# Secrets and machine-local environment
+# 密钥和本机环境文件
 .env
 .env.*
 !.env.example
@@ -18,5 +18,5 @@ tmp/
 id_rsa*
 id_ed25519*
 
-# Generated logs
+# 生成的日志
 *.log

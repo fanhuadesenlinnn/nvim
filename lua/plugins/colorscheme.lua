@@ -12,7 +12,7 @@ local function apply_tokyonight()
     },
   })
 
-  vim.cmd.colorscheme("tokyonight")
+  require("tokyonight").load()
 end
 
 return {
@@ -48,11 +48,11 @@ return {
       fallback = "dark",
       set_dark_mode = function()
         vim.api.nvim_set_option_value("background", "dark", {})
-        apply_tokyonight("dark")
+        apply_tokyonight()
       end,
       set_light_mode = function()
-        vim.api.nvim_set_option_value("background", "light", {})
-        apply_tokyonight("light")
+        vim.api.nvim_set_option_value("background", "dark", {})
+        apply_tokyonight()
       end,
     },
   },

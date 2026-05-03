@@ -24,10 +24,11 @@ This config uses `lazy.nvim` as the plugin manager and keeps plugin groups in sm
 
 ## Theme
 
-The theme is fixed to TokyoNight Moon for a stable dark appearance:
+The theme is fixed to TokyoNight Moon, matching LazyVim's default theme choice:
 
 - Neovim uses `tokyonight-moon`.
-- `auto-dark-mode.nvim` is installed but disabled, so the editor does not change when the operating system appearance changes.
+- The theme is loaded with LazyVim's default `require("tokyonight").load()` path.
+- `auto-dark-mode.nvim` is installed but disabled, so the editor stays on the LazyVim default dark theme.
 
 Catppuccin is included as a LazyVim-compatible optional theme, but TokyoNight is the active default.
 

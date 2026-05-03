@@ -43,7 +43,7 @@ vim.g.neovide_input_macos_option_key_is_meta = "only_left"
 vim.g.neovide_highlight_matching_pair = true
 vim.g.neovide_proxy_icon = true
 
--- Recent Neovide builds can use Neovim's mouse grid detection when available.
+-- 较新的 Neovide 可以在可用时使用 Neovim 的鼠标网格检测能力。
 if vim.fn.has("nvim-0.12") == 1 then
   vim.g.neovide_has_mouse_grid_detection = true
 end

@@ -1,5 +1,5 @@
-# Neovide reads this as its app-level config, outside init.lua.
-# On macOS it is commonly used as ~/.config/neovide/config.toml.
+# Neovide 会把这个文件作为应用级配置读取，它独立于 init.lua。
+# 在 macOS 上，常见位置是 ~/.config/neovide/config.toml。
 
 fork = false
 frame = "full"
