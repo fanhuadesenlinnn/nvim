@@ -4,23 +4,36 @@ return {
     branch = "0.1.x",
     cmd = "Telescope",
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
-      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
+      { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "查找文件" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "查找文件" },
+      {
+        "<leader>fg",
+        function()
+          if vim.fn.executable("rg") == 0 then
+            vim.notify("全文搜索需要 ripgrep。\nmacOS: brew install ripgrep\nUbuntu/Debian: sudo apt install ripgrep", vim.log.levels.WARN, { title = "缺少 rg" })
+            return
+          end
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "全文搜索",
+      },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "查找已打开文件" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "查找帮助文档" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "查找最近文件" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
+        -- 没有 make 时跳过原生加速扩展，Telescope 本体仍然可以使用。
         cond = function()
           return vim.fn.executable("make") == 1
         end,
       },
     },
     opts = {
+      -- Telescope 是“搜索/选择器”，常用来找文件、找文字、找帮助。
       defaults = {
         prompt_prefix = "  ",
         selection_caret = "> ",
@@ -45,6 +58,7 @@ return {
     config = function(_, opts)
       local telescope = require("telescope")
       telescope.setup(opts)
+      -- fzf-native 是可选加速扩展；缺失时 pcall 会静默跳过。
       pcall(telescope.load_extension, "fzf")
     end,
   },

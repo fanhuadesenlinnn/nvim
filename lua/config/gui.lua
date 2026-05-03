@@ -2,6 +2,8 @@ if not vim.g.neovide then
   return
 end
 
+local system = (vim.uv or vim.loop).os_uname().sysname
+
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h15"
 
 vim.g.neovide_scale_factor = 1.0
@@ -39,9 +41,13 @@ vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_confirm_quit = true
 vim.g.neovide_progress_bar_enabled = true
 vim.g.neovide_message_area_drag_selection = false
-vim.g.neovide_input_macos_option_key_is_meta = "only_left"
 vim.g.neovide_highlight_matching_pair = true
 vim.g.neovide_proxy_icon = true
+
+-- 这个设置只对 macOS 有意义：左 Option 当作 Meta，右 Option 仍可输入特殊字符。
+if system == "Darwin" then
+  vim.g.neovide_input_macos_option_key_is_meta = "only_left"
+end
 
 -- 较新的 Neovide 可以在可用时使用 Neovim 的鼠标网格检测能力。
 if vim.fn.has("nvim-0.12") == 1 then

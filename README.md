@@ -1,51 +1,90 @@
-# Personal Neovim Config
+# 个人 Neovim 配置
 
-This config uses `lazy.nvim` as the plugin manager and keeps plugin groups in small modules.
+这是一套基于 `lazy.nvim` 管理插件的 Neovim 配置，目标是同时适合终端 Neovim 和 Neovide 使用。
 
-## Layout
+## 目录结构
 
-- `init.lua` loads the config in a predictable order.
-- `lua/config/options.lua` contains editor options shared by terminal Neovim and Neovide.
-- `lua/config/gui.lua` is only active when `vim.g.neovide` is set.
-- `lua/config/plugins.lua` is the plugin switchboard. Comment one import line to disable a whole feature group.
-- `lua/plugins/*.lua` contains one focused plugin group per file.
-- `neovide/config.toml` contains Neovide app-level settings that do not belong in `init.lua`.
+- `init.lua`：启动入口，按顺序加载配置。
+- `lua/config/options.lua`：通用编辑器选项，终端和 Neovide 都会使用。
+- `lua/config/keymaps.lua`：通用快捷键。
+- `lua/config/gui.lua`：只在 Neovide 中生效的图形界面配置。
+- `lua/config/health.lua`：启动后检查常见依赖，缺少工具时给出安装提示。
+- `lua/config/plugins.lua`：插件开关总表；想关闭一组插件，注释一行 `import` 即可。
+- `lua/plugins/*.lua`：每类插件一个文件，方便阅读和修改。
+- `neovide/config.toml`：Neovide 应用级配置。
 
-## Main Plugins
+## 启动页
 
-- Completion: `saghen/blink.cmp`
-- File tree: `nvim-tree/nvim-tree.lua`
-- Fuzzy finder: `nvim-telescope/telescope.nvim`
-- Cursor jump: `folke/flash.nvim`
-- Key hints: `folke/which-key.nvim`
-- Auto light/dark switching: `f-person/auto-dark-mode.nvim`
-- LSP basics: `mason.nvim`, `mason-lspconfig.nvim`, `nvim-lspconfig`
-- Syntax: `nvim-treesitter/nvim-treesitter`
+启动时会显示 LazyVim 风格的友好首页，由 `folke/snacks.nvim` 提供。
 
-## Theme
+首页里可以直接按键：
 
-The theme is fixed to TokyoNight Moon, matching LazyVim's default theme choice:
+- `f`：查找文件
+- `n`：新建文件
+- `g`：全文搜索
+- `r`：最近文件
+- `c`：编辑 Neovim 配置
+- `l`：打开 Lazy 插件管理器
+- `q`：退出
 
-- Neovim uses `tokyonight-moon`.
-- The theme is loaded with LazyVim's default `require("tokyonight").load()` path.
-- `auto-dark-mode.nvim` is installed but disabled, so the editor stays on the LazyVim default dark theme.
+## 主要插件
 
-Catppuccin is included as a LazyVim-compatible optional theme, but TokyoNight is the active default.
+- 补全：`saghen/blink.cmp`
+- 文件树：`nvim-tree/nvim-tree.lua`
+- 模糊查找：`nvim-telescope/telescope.nvim`
+- 光标跳转：`folke/flash.nvim`
+- 启动页/通知/输入框：`folke/snacks.nvim`
+- 快捷键提示：`folke/which-key.nvim`
+- 主题：`folke/tokyonight.nvim`
+- LSP 基础：`mason.nvim`、`mason-lspconfig.nvim`、`nvim-lspconfig`
+- 语法高亮：`nvim-treesitter/nvim-treesitter`
 
-## Keymaps
+## 主题
 
-The leader key is `<Space>`. Press `<Space>` and wait briefly to see key hints from `which-key.nvim`.
+主题固定为 LazyVim 默认风格的 TokyoNight Moon：
 
-See `docs/keymaps.md` for the full keymap table.
+- Neovim 使用 `tokyonight-moon`。
+- 主题通过 `require("tokyonight").load()` 加载，贴近 LazyVim 默认方式。
+- `auto-dark-mode.nvim` 保留但默认禁用，避免偏离 LazyVim 默认暗色主题。
+- Catppuccin 暂时只是备用主题，默认不会启用。
 
-## Disable A Feature
+## 快捷键
 
-Edit `lua/config/plugins.lua` and comment one import:
+`<Space>` 是 leader 键。按下 `<Space>` 后稍等一下，`which-key.nvim` 会弹出快捷键提示。
+
+完整快捷键表见 `docs/keymaps.md`。
+
+## 依赖提示
+
+配置启动后会检查常见工具：
+
+- `git`：安装和更新插件需要。
+- `rg`：Telescope 全文搜索需要。
+- C 编译器：Treesitter 安装语法解析器时常用。
+- Linux 剪贴板工具：终端复制粘贴可能需要 `wl-clipboard` 或 `xclip`。
+
+缺少工具时，Neovim 会给出 macOS、Ubuntu/Debian、Fedora 的安装提示。
+
+## 关闭某组插件
+
+编辑 `lua/config/plugins.lua`，注释对应一行即可，例如关闭文件树：
 
 ```lua
 -- { import = "plugins.filetree" },
 ```
 
-## Notes
+## 第一次启动
 
-The first launch bootstraps `lazy.nvim`, installs plugins, and creates a lockfile. Run `:Lazy` to inspect, update, or sync plugins.
+第一次启动会自动安装 `lazy.nvim` 和插件。安装完成后，可以运行：
+
+```vim
+:Lazy
+```
+
+查看插件状态，或运行：
+
+```vim
+:checkhealth
+```
+
+检查 Neovim 环境是否健康。

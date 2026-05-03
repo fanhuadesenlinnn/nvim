@@ -1,77 +1,77 @@
-# Keymaps
+# 快捷键说明
 
-The leader key is `<Space>`. Press `<Space>` and wait briefly to let `which-key.nvim` show the available mappings in Neovim or Neovide.
+`<Space>` 是 leader 键。按下 `<Space>` 后稍等一下，`which-key.nvim` 会在 Neovim 或 Neovide 里显示可用快捷键。
 
-## Daily Use
+## 日常操作
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `<Space><Space>` | Find files |
-| `<Space>w` | Save current file |
-| `<Space>q` | Quit current window |
-| `<Space>Q` | Quit all windows |
-| `<Esc>` | Clear search highlight |
+| `<Space><Space>` | 查找文件 |
+| `<Space>w` | 保存当前文件 |
+| `<Space>q` | 关闭当前窗口 |
+| `<Space>Q` | 退出 Neovim |
+| `<Esc>` | 清除搜索高亮 |
 
-## Files And Search
+## 文件和搜索
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `<Space>e` | Toggle file tree |
-| `<Space>E` | Reveal current file in tree |
-| `<Space>ff` | Find files with Telescope |
-| `<Space>fg` | Live grep with Telescope |
-| `<Space>fb` | Find open buffers |
-| `<Space>fh` | Search help tags |
-| `<Space>fr` | Recent files |
+| `<Space>e` | 打开/关闭文件树 |
+| `<Space>E` | 在文件树中定位当前文件 |
+| `<Space>ff` | 用 Telescope 查找文件 |
+| `<Space>fg` | 用 Telescope 全文搜索 |
+| `<Space>fb` | 查找已打开的 buffer |
+| `<Space>fh` | 查找帮助文档 |
+| `<Space>fr` | 查找最近文件 |
 
-## Motion
+## 快速跳转
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `s` | Flash jump |
-| `S` | Flash Treesitter jump |
-| `r` | Remote Flash in operator-pending mode |
-| `R` | Treesitter search in visual/operator mode |
+| `s` | Flash 快速跳转 |
+| `S` | 按语法结构跳转 |
+| `r` | operator-pending 模式下远程选择操作目标 |
+| `R` | 可视/operator 模式下按语法结构搜索 |
 
-## Windows And Buffers
+## 窗口和 buffer
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `<C-h>` | Focus left window |
-| `<C-j>` | Focus lower window |
-| `<C-k>` | Focus upper window |
-| `<C-l>` | Focus right window |
-| `<S-h>` | Previous buffer |
-| `<S-l>` | Next buffer |
-| `<Space>bd` | Delete buffer |
-| `<Space>sv` | Vertical split |
-| `<Space>sh` | Horizontal split |
-| `<Space>se` | Equalize splits |
-| `<Space>sx` | Close split |
+| `<C-h>` | 切到左侧窗口 |
+| `<C-j>` | 切到下方窗口 |
+| `<C-k>` | 切到上方窗口 |
+| `<C-l>` | 切到右侧窗口 |
+| `<S-h>` | 上一个 buffer |
+| `<S-l>` | 下一个 buffer |
+| `<Space>bd` | 关闭当前 buffer |
+| `<Space>sv` | 垂直分屏 |
+| `<Space>sh` | 水平分屏 |
+| `<Space>se` | 平均分配分屏大小 |
+| `<Space>sx` | 关闭当前分屏 |
 
-## LSP And Tools
+## LSP 和工具
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `gd` | Go to definition |
-| `gD` | Go to declaration |
-| `gr` | References |
-| `gi` | Go to implementation |
-| `K` | Hover documentation |
-| `<Space>rn` | Rename symbol |
-| `<Space>ca` | Code action |
-| `[d` | Previous diagnostic |
-| `]d` | Next diagnostic |
-| `<Space>fd` | Line diagnostics |
-| `<Space>ll` | Open Lazy plugin manager |
-| `<Space>lm` | Open Mason package manager |
-| `<Space>uh` | Run checkhealth |
-| `<Space>uw` | Toggle line wrap |
-| `<Space>un` | Toggle relative numbers |
+| `gd` | 跳转到定义 |
+| `gD` | 跳转到声明 |
+| `gr` | 查找引用 |
+| `gi` | 跳转到实现 |
+| `K` | 查看悬浮文档 |
+| `<Space>rn` | 重命名符号 |
+| `<Space>ca` | 代码操作 |
+| `[d` | 上一个诊断 |
+| `]d` | 下一个诊断 |
+| `<Space>fd` | 查看本行诊断 |
+| `<Space>ll` | 打开 Lazy 插件管理器 |
+| `<Space>lm` | 打开 Mason 工具管理器 |
+| `<Space>uh` | 检查 Neovim 健康状态 |
+| `<Space>uw` | 切换自动换行 |
+| `<Space>un` | 切换相对行号 |
 
 ## Neovide
 
-| Key | Action |
+| 快捷键 | 作用 |
 | --- | --- |
-| `<Cmd-s>` | Save current file |
-| `<Cmd-v>` | Paste from system clipboard |
+| `<Cmd-s>` | 保存当前文件 |
+| `<Cmd-v>` | 从系统剪贴板粘贴 |

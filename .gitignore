@@ -5,6 +5,10 @@ Sessionx.vim
 .cache/
 .local/
 .tmp/
+.test-cache/
+.test-config/
+.test-data/
+.test-state/
 tmp/
 
 # 密钥和本机环境文件

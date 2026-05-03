@@ -16,7 +16,7 @@ return {
         function()
           require("flash").jump()
         end,
-        desc = "Flash jump",
+        desc = "快速跳转到可见位置",
       },
       {
         "S",
@@ -24,7 +24,7 @@ return {
         function()
           require("flash").treesitter()
         end,
-        desc = "Flash treesitter",
+        desc = "按语法结构跳转",
       },
       {
         "r",
@@ -32,7 +32,7 @@ return {
         function()
           require("flash").remote()
         end,
-        desc = "Remote flash",
+        desc = "远程选择操作目标",
       },
       {
         "R",
@@ -40,7 +40,7 @@ return {
         function()
           require("flash").treesitter_search()
         end,
-        desc = "Treesitter search",
+        desc = "按语法结构搜索",
       },
     },
   },
