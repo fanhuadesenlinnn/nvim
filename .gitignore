@@ -1,0 +1,22 @@
+# Local editor/runtime state
+.DS_Store
+Session.vim
+Sessionx.vim
+.cache/
+.local/
+.tmp/
+tmp/
+
+# Secrets and machine-local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+
+# Generated logs
+*.log

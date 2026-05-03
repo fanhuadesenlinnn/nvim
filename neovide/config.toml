@@ -1,0 +1,33 @@
+# Neovide reads this as its app-level config, outside init.lua.
+# On macOS it is commonly used as ~/.config/neovide/config.toml.
+
+fork = false
+frame = "full"
+idle = true
+maximized = false
+no-multigrid = false
+srgb = false
+tabs = true
+system-native-tabs = true
+system-pinned-hotkey = "cmd+ctrl+z"
+system-switcher-hotkey = "cmd+ctrl+n"
+system-new-window-hotkey = "cmd+n"
+system-hide-hotkey = "cmd+h"
+system-hide-others-hotkey = "cmd+alt+h"
+system-quit-hotkey = "cmd+q"
+system-minimize-hotkey = "cmd+m"
+system-fullscreen-hotkey = "cmd+ctrl+f"
+system-show-all-tabs-hotkey = "cmd+shift+e"
+system-tab-prev-hotkey = "cmd+shift+["
+system-tab-next-hotkey = "cmd+shift+]"
+theme = "auto"
+title-hidden = false
+vsync = true
+wsl = false
+
+[font]
+normal = ["JetBrainsMono Nerd Font Mono"]
+size = 15.0
+
+[box-drawing]
+mode = "font-glyph"
