@@ -1,13 +1,11 @@
-local function apply_tokyonight(background)
-  background = background or vim.o.background
-
+local function apply_tokyonight()
+  vim.o.background = "dark"
   require("tokyonight").setup({
-    style = background == "light" and "day" or "moon",
-    light_style = "day",
+    style = "moon",
     terminal_colors = true,
     styles = {
-      sidebars = background == "light" and "light" or "dark",
-      floats = background == "light" and "light" or "dark",
+      sidebars = "dark",
+      floats = "dark",
     },
     plugins = {
       auto = true,
@@ -23,14 +21,6 @@ return {
     priority = 1000,
     config = function()
       apply_tokyonight()
-
-      vim.api.nvim_create_autocmd("OptionSet", {
-        group = vim.api.nvim_create_augroup("user_theme", { clear = true }),
-        pattern = "background",
-        callback = function()
-          apply_tokyonight(vim.v.option_new)
-        end,
-      })
     end,
   },
   {
@@ -51,6 +41,7 @@ return {
   },
   {
     "f-person/auto-dark-mode.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
       update_interval = 3000,
