@@ -56,6 +56,12 @@
 
 完整快捷键表见 `docs/keymaps.md`。
 
+## 常用命令
+
+Neovim 里的命令一般以 `:` 开头，例如 `:Lazy`、`:Mason`、`:TSInstall bash`。
+
+常用命令和排查方法见 `docs/commands.md`，里面记录了插件管理、Treesitter parser 安装、LSP、文件树、Telescope 等命令的用途。
+
 ## 依赖提示
 
 配置启动后会检查常见工具：
@@ -79,13 +85,27 @@ brew install tree-sitter-cli
 
 Linux 发行版里一般叫 `tree-sitter-cli`。缺少时启动后会提示安装命令。
 
-高亮启用方式使用 Neovim 原生 `vim.treesitter.start()`；Scratch、启动页、插件面板和超大文件会自动跳过，避免临时窗口触发 parser 报错。
+高亮启用方式使用 Neovim 原生 `vim.treesitter.start()`；临时脚本、Scratch 代码 buffer 会优先按 filetype 启用，高亮缺失时再按文件后缀推断，例如 `.sh` 使用 bash parser、`.lua` 使用 lua parser。启动页、插件面板、Telescope 预览窗口和超大文件会自动跳过，避免工具窗口触发 parser 报错。
 
 更新 Treesitter 和 parser 时运行：
 
 ```vim
 :Lazy update nvim-treesitter
 ```
+
+如果某个语言没有 Treesitter 高亮，例如 bash/sh 文件，可以运行：
+
+```vim
+:TSInstall bash
+```
+
+如果刚修改了配置里的 parser 列表，可以运行：
+
+```vim
+:Lazy build nvim-treesitter
+```
+
+更多命令说明见 `docs/commands.md`。
 
 ## 关闭某组插件
 

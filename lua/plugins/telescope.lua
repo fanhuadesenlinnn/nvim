@@ -39,6 +39,13 @@ return {
         selection_caret = "> ",
         path_display = { "smart" },
         sorting_strategy = "ascending",
+        -- Telescope 预览窗口是临时工具窗口，不是真正进入编辑的代码页面。
+        -- 这里关闭预览器内部 Treesitter，避免旧版 Telescope 调用 Neovim 0.12 已移除的接口。
+        preview = {
+          treesitter = {
+            enable = false,
+          },
+        },
         layout_config = {
           prompt_position = "top",
         },

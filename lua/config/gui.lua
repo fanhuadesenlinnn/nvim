@@ -25,9 +25,11 @@ vim.g.neovide_floating_corner_radius = 0.15
 
 vim.g.neovide_cursor_animation_length = 0.06
 vim.g.neovide_cursor_short_animation_length = 0.03
-vim.g.neovide_cursor_trail_size = 0.6
+-- trail_size 控制“光标矩形本体”的拖尾；设为 0 表示不保留尾迹。
+vim.g.neovide_cursor_trail_size = 0.0
 vim.g.neovide_cursor_antialiasing = true
-vim.g.neovide_cursor_vfx_mode = "railgun"
+-- LazyVim 默认不会在 Neovide 中打开粒子特效；空字符串表示关闭气泡、鱼雷等粒子效果。
+vim.g.neovide_cursor_vfx_mode = ""
 vim.g.neovide_scroll_animation_length = 0.15
 vim.g.neovide_scroll_animation_far_lines = 1
 
