@@ -50,6 +50,15 @@ function M.check()
     })
   end
 
+  if not executable("tree-sitter") then
+    notify_missing("缺少 tree-sitter CLI", {
+      "新版 nvim-treesitter 需要 tree-sitter CLI 来安装/更新语法解析器。",
+      "macOS: brew install tree-sitter-cli",
+      "Ubuntu/Debian: sudo apt install tree-sitter-cli",
+      "Fedora: sudo dnf install tree-sitter-cli",
+    })
+  end
+
   if system == "Linux" and vim.fn.has("clipboard") == 0 then
     notify_missing("系统剪贴板不可用", {
       "Linux 终端下复制粘贴可能需要额外工具。",

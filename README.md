@@ -67,6 +67,26 @@
 
 缺少工具时，Neovim 会给出 macOS、Ubuntu/Debian、Fedora 的安装提示。
 
+## Treesitter
+
+这套配置使用 `nvim-treesitter` 的 `main` 分支，更适合 Neovim 0.12 之后的新版本。
+
+新版 Treesitter 需要 `tree-sitter` 命令行工具：
+
+```sh
+brew install tree-sitter-cli
+```
+
+Linux 发行版里一般叫 `tree-sitter-cli`。缺少时启动后会提示安装命令。
+
+高亮启用方式使用 Neovim 原生 `vim.treesitter.start()`；Scratch、启动页、插件面板和超大文件会自动跳过，避免临时窗口触发 parser 报错。
+
+更新 Treesitter 和 parser 时运行：
+
+```vim
+:Lazy update nvim-treesitter
+```
+
 ## 关闭某组插件
 
 编辑 `lua/config/plugins.lua`，注释对应一行即可，例如关闭文件树：
