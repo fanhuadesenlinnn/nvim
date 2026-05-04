@@ -19,7 +19,7 @@
 
 首页里可以直接按键：
 
-- `f`：查找文件
+- `p`：查找文件
 - `n`：新建文件
 - `g`：全文搜索
 - `r`：最近文件
@@ -32,7 +32,7 @@
 - 补全：`saghen/blink.cmp`
 - 文件树：`nvim-tree/nvim-tree.lua`
 - 模糊查找：`nvim-telescope/telescope.nvim`
-- 光标跳转：`folke/flash.nvim`
+- 光标跳转：自定义 `f` 可见区字符跳转 + `folke/flash.nvim`
 - 启动页/通知/输入框：`folke/snacks.nvim`
 - 快捷键提示：`folke/which-key.nvim`
 - 主题：`folke/tokyonight.nvim`
@@ -51,6 +51,8 @@
 ## 快捷键
 
 `<Space>` 是 leader 键。按下 `<Space>` 后稍等一下，`which-key.nvim` 会弹出快捷键提示。
+
+常用跳转：按 `f`，当前 tab 的所有可见窗口会变灰；再输入目标字符，所有相同字符会显示标签；最后输入标签即可跳转。
 
 完整快捷键表见 `docs/keymaps.md`。
 
