@@ -1,8 +1,10 @@
 return {
   {
+    -- flash.nvim 是 LazyVim 也常用的跳转插件；这里用它实现你要的 f 全窗口可见字符跳转。
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
+      -- 标签字母优先放左手常用键，跳转时更顺手。想换标签顺序可以改这个字符串。
       labels = "asdfghjklqwertyuiopzxcvbnm",
       modes = {
         char = {
@@ -17,6 +19,7 @@ return {
         "f",
         mode = "n",
         function()
+          -- 自定义逻辑放在 lua/config/jump.lua，避免 motion.lua 变得太复杂。
           require("config.jump").visible()
         end,
         desc = "当前 tab 可见窗口按字符跳转",

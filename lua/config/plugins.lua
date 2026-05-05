@@ -1,3 +1,8 @@
+-- 这里是插件开关总表。
+-- 每一行 import 都会加载 lua/plugins/xxx.lua 里的插件配置。
+-- 想临时关闭某一组插件时，直接注释对应一行即可，例如：
+--   -- { import = "plugins.filetree" },
+-- 这种拆分方式和 lazy.nvim 推荐的 import 风格一致，也方便以后继续扩展。
 return {
   -- 主题：LazyVim 默认风格的 TokyoNight Moon。
   { import = "plugins.colorscheme" },

@@ -6,6 +6,7 @@ return {
     opts = {},
   },
   {
+    -- mason-lspconfig 负责把 Mason 安装的语言服务器和 Neovim LSP 连接起来。
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
       "mason-org/mason.nvim",
@@ -20,6 +21,7 @@ return {
     },
   },
   {
+    -- nvim-lspconfig 提供各语言服务器的标准配置入口。
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()

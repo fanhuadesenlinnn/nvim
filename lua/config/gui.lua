@@ -2,19 +2,28 @@ if not vim.g.neovide then
   return
 end
 
+-- 这个文件只在 Neovide 中生效。
+-- 终端 Neovim 不会执行下面的设置，所以可以放心使用 Neovide 专属功能。
 local system = (vim.uv or vim.loop).os_uname().sysname
 
+-- 字体只影响 Neovide。没有安装这个字体时，Neovide 会回退到系统默认字体。
+-- 想换字体，通常只改这里的字体名和 h 后面的字号。
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h15"
 
+-- 缩放和文字渲染。scale_factor 可以临时调大/调小整体界面。
 vim.g.neovide_scale_factor = 1.0
 vim.g.neovide_text_gamma = 0.8
 vim.g.neovide_text_contrast = 0.1
 vim.g.neovide_pixel_geometry = "RGBH"
+
+-- 窗口内边距。喜欢内容贴边可以调小，喜欢留白可以调大。
 vim.g.neovide_padding_top = 8
 vim.g.neovide_padding_bottom = 8
 vim.g.neovide_padding_left = 8
 vim.g.neovide_padding_right = 8
 
+-- 透明、模糊和浮动窗口阴影是 Neovide 的图形界面体验增强。
+-- 如果在老机器上觉得卡，可以优先把 window_blurred 改成 false。
 vim.g.neovide_opacity = 0.95
 vim.g.neovide_normal_opacity = 0.95
 vim.g.neovide_window_blurred = true
@@ -33,15 +42,19 @@ vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_smooth_blink = false
 -- LazyVim 默认不会在 Neovide 中打开粒子特效；空字符串表示关闭气泡、鱼雷等粒子效果。
 vim.g.neovide_cursor_vfx_mode = ""
+
+-- 滚动动画。数值越小滚动越干脆，越大越柔和。
 vim.g.neovide_scroll_animation_length = 0.15
 vim.g.neovide_scroll_animation_far_lines = 1
 
+-- 刷新率：前台尽量流畅，空闲时降到较低刷新率省电。
 vim.g.neovide_refresh_rate = 120
 vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_no_idle = false
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_theme = "auto"
 
+-- 一些更贴近日常桌面应用的行为：输入时隐藏鼠标、退出前确认等。
 vim.g.neovide_hide_mouse_when_typing = true
 vim.g.neovide_confirm_quit = true
 vim.g.neovide_progress_bar_enabled = true

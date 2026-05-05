@@ -1,7 +1,9 @@
 return {
   {
+    -- Telescope 是社区非常流行的模糊查找插件，用来找文件、搜文本、查帮助。
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    -- 只有执行 :Telescope 或按下面这些快捷键时才加载。
     cmd = "Telescope",
     keys = {
       { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "查找文件" },
@@ -9,6 +11,7 @@ return {
       {
         "<leader>fg",
         function()
+          -- live_grep 依赖 ripgrep；这里提前提示安装方式，比直接报错更友好。
           if vim.fn.executable("rg") == 0 then
             vim.notify("全文搜索需要 ripgrep。\nmacOS: brew install ripgrep\nUbuntu/Debian: sudo apt install ripgrep", vim.log.levels.WARN, { title = "缺少 rg" })
             return
@@ -58,6 +61,7 @@ return {
       },
       pickers = {
         find_files = {
+          -- true 表示查找文件时也显示隐藏文件，例如 .gitignore、.env。
           hidden = true,
         },
       },

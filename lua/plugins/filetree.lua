@@ -1,6 +1,8 @@
 return {
   {
+    -- nvim-tree 是社区常用的目录树插件，负责左侧文件浏览和文件操作。
     "nvim-tree/nvim-tree.lua",
+    -- cmd/keys 表示按命令或快捷键时再加载插件，平时启动更轻。
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "打开/关闭文件树" },
@@ -44,7 +46,9 @@ return {
         signcolumn = "yes",
       },
       renderer = {
+        -- group_empty 会把连续的空目录合并显示，项目层级深时更清爽。
         group_empty = true,
+        -- Git 状态和当前打开文件会在目录树里高亮，方便判断文件变化。
         highlight_git = true,
         highlight_opened_files = "name",
         icons = {
@@ -57,6 +61,7 @@ return {
         },
       },
       filters = {
+        -- false 表示显示 .gitignore、.env 这类点文件；新手排查配置时更不容易找不到文件。
         dotfiles = false,
       },
     },

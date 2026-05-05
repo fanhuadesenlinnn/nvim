@@ -52,6 +52,7 @@ return {
     },
   },
   {
+    -- which-key 会在你按下 <Space> 后弹出快捷键提示，新手记快捷键会轻松很多。
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
@@ -76,6 +77,7 @@ return {
     },
   },
   {
+    -- lualine 是底部状态栏：显示当前文件、模式、Git 分支、诊断等信息。
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     dependencies = {

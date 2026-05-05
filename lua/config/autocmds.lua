@@ -1,5 +1,6 @@
 local group = vim.api.nvim_create_augroup("user_config", { clear = true })
 
+-- 复制文字后短暂高亮一下刚复制的范围，确认自己复制对了。
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = group,
   callback = function()
@@ -7,6 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- 重新打开文件时回到上次离开的位置；读长文件时很有用。
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = group,
   callback = function(event)
