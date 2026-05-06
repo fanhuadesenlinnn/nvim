@@ -16,6 +16,8 @@ return {
   { import = "plugins.motion" },
   -- 终端：在 Neovim 里打开浮动/横向/纵向终端。
   { import = "plugins.terminal" },
+  -- Git：在行号旁显示增删改，并提供暂存、撤销、预览改动等操作。
+  { import = "plugins.git" },
   -- LSP：代码跳转、诊断、重命名等语言能力。
   { import = "plugins.lsp" },
   -- 语法：更准确的高亮和缩进。

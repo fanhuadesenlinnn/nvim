@@ -61,6 +61,7 @@ return {
       spec = {
         { "<leader>b", group = "已打开文件操作" },
         { "<leader>f", group = "查找/搜索" },
+        { "<leader>g", group = "Git 操作" },
         { "<leader>l", group = "Lazy/LSP 工具" },
         { "<leader>s", group = "分屏操作" },
         { "<leader>u", group = "界面/工具开关" },
