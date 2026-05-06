@@ -14,6 +14,8 @@ return {
   { import = "plugins.telescope" },
   -- 跳转：在屏幕内快速跳到目标位置。
   { import = "plugins.motion" },
+  -- 多光标：批量修改相同文本、列编辑、多行同时插入。
+  { import = "plugins.multicursor" },
   -- 终端：在 Neovim 里打开浮动/横向/纵向终端。
   { import = "plugins.terminal" },
   -- Git：在行号旁显示增删改，并提供暂存、撤销、预览改动等操作。
