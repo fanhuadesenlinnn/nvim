@@ -33,6 +33,7 @@
 - 文件树：`nvim-tree/nvim-tree.lua`
 - 模糊查找：`nvim-telescope/telescope.nvim`
 - 光标跳转：自定义 `f` 可见区字符跳转 + `folke/flash.nvim`
+- 终端：`akinsho/toggleterm.nvim`
 - 启动页/通知/输入框：`folke/snacks.nvim`
 - 快捷键提示：`folke/which-key.nvim`
 - 主题：`folke/tokyonight.nvim`
