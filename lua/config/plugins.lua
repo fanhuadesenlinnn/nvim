@@ -10,6 +10,8 @@ return {
   { import = "plugins.completion" },
   -- 文件树：左侧目录浏览。
   { import = "plugins.filetree" },
+  -- Buffer 标签栏：顶部显示已打开文件，方便切换和关闭。
+  { import = "plugins.bufferline" },
   -- 搜索：查找文件、全文搜索、帮助文档。
   { import = "plugins.telescope" },
   -- 跳转：在屏幕内快速跳到目标位置。

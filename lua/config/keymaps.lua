@@ -13,8 +13,17 @@ keymap("n", "<C-k>", "<C-w>k", { desc = "切到上方窗口" })
 keymap("n", "<C-l>", "<C-w>l", { desc = "切到右侧窗口" })
 
 -- 已打开文件：Neovim 里常叫 buffer，可以理解成“正在内存中打开的文件”。
-keymap("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "上一个已打开文件" })
-keymap("n", "<S-l>", "<cmd>bnext<cr>", { desc = "下一个已打开文件" })
+-- 如果启用了 bufferline.nvim，就使用它的切换命令；插件被关闭时自动退回 Neovim 内置切换。
+keymap("n", "<S-h>", function()
+  if not pcall(vim.cmd, "BufferLineCyclePrev") then
+    vim.cmd("bprevious")
+  end
+end, { desc = "上一个已打开文件" })
+keymap("n", "<S-l>", function()
+  if not pcall(vim.cmd, "BufferLineCycleNext") then
+    vim.cmd("bnext")
+  end
+end, { desc = "下一个已打开文件" })
 keymap("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "关闭当前已打开文件" })
 
 -- 分屏操作：v 是 vertical 垂直分屏，h 是 horizontal 水平分屏。

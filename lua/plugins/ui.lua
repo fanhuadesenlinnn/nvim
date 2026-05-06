@@ -58,13 +58,22 @@ return {
     opts = {
       preset = "helix",
       delay = 250,
+      win = {
+        border = "rounded",
+        padding = { 1, 2 },
+      },
+      layout = {
+        spacing = 4,
+      },
       spec = {
-        { "<leader>b", group = "已打开文件操作" },
+        -- 这里维护 <Space> 后的一级菜单名。以后新增插件快捷键时，也可以在这里补一个 group。
+        { "<leader>b", group = "Buffer / 已打开文件" },
         { "<leader>f", group = "查找/搜索" },
         { "<leader>g", group = "Git 操作" },
         { "<leader>l", group = "Lazy/LSP 工具" },
         { "<leader>s", group = "分屏操作" },
-        { "<leader>u", group = "界面/工具开关" },
+        { "<leader>t", group = "终端" },
+        { "<leader>u", group = "界面/撤销/工具开关" },
         { "<leader>uu", desc = "撤销历史树" },
       },
     },

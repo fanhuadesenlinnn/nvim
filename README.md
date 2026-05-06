@@ -31,6 +31,7 @@
 
 - 补全：`saghen/blink.cmp`
 - 文件树：`nvim-tree/nvim-tree.lua`
+- Buffer 标签栏：`akinsho/bufferline.nvim`
 - 模糊查找：`nvim-telescope/telescope.nvim`
 - 光标跳转：自定义 `f` 可见区字符跳转 + `folke/flash.nvim`
 - 多光标编辑：`mg979/vim-visual-multi`

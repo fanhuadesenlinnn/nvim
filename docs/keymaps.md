@@ -70,7 +70,14 @@
 | `<C-l>` | 切到右侧窗口 |
 | `<S-h>` | 上一个 buffer |
 | `<S-l>` | 下一个 buffer |
+| `<Space>bb` | 选择一个已打开文件 |
+| `<Space>bc` | 选择并关闭一个已打开文件 |
 | `<Space>bd` | 关闭当前 buffer |
+| `<Space>bp` | 固定/取消固定当前 buffer |
+| `<Space>bP` | 关闭所有未固定 buffer |
+| `<Space>bo` | 关闭其他 buffer |
+| `<Space>br` | 关闭右侧 buffer |
+| `<Space>bl` | 关闭左侧 buffer |
 | `<Space>sv` | 垂直分屏 |
 | `<Space>sh` | 水平分屏 |
 | `<Space>se` | 平均分配分屏大小 |
