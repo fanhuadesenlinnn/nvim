@@ -65,6 +65,7 @@ return {
         { "<leader>l", group = "Lazy/LSP 工具" },
         { "<leader>s", group = "分屏操作" },
         { "<leader>u", group = "界面/工具开关" },
+        { "<leader>uu", desc = "撤销历史树" },
       },
     },
     keys = {
