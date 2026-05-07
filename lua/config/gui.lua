@@ -52,6 +52,7 @@ vim.g.neovide_refresh_rate = 120
 vim.g.neovide_refresh_rate_idle = 5
 vim.g.neovide_no_idle = false
 vim.g.neovide_remember_window_size = true
+vim.g.neovide_fullscreen = false
 vim.g.neovide_theme = "auto"
 
 -- 一些更贴近日常桌面应用的行为：输入时隐藏鼠标、退出前确认等。
@@ -85,3 +86,6 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave", "CmdlineEnter", "Cmd
 vim.keymap.set({ "n", "v" }, "<D-s>", "<cmd>write<cr>", { desc = "Write file" })
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { desc = "Paste from clipboard" })
 vim.keymap.set("i", "<D-v>", "<C-r>+", { desc = "Paste from clipboard" })
+vim.keymap.set("n", "<F11>", function()
+  vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+end, { desc = "切换 Neovide 全屏" })
