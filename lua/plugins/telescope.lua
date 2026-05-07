@@ -13,7 +13,7 @@ return {
         function()
           -- live_grep 依赖 ripgrep；这里提前提示安装方式，比直接报错更友好。
           if vim.fn.executable("rg") == 0 then
-            vim.notify("全文搜索需要 ripgrep。\nmacOS: brew install ripgrep\nUbuntu/Debian: sudo apt install ripgrep", vim.log.levels.WARN, { title = "缺少 rg" })
+            vim.notify("全文搜索需要 ripgrep。\nmacOS: brew install ripgrep\nUbuntu/Debian: sudo apt install ripgrep\nArch Linux: sudo pacman -S ripgrep\nWindows: winget install --id BurntSushi.ripgrep.MSVC -e", vim.log.levels.WARN, { title = "缺少 rg" })
             return
           end
           require("telescope.builtin").live_grep()

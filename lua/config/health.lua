@@ -29,6 +29,8 @@ function M.check()
       "macOS: brew install git",
       "Ubuntu/Debian: sudo apt install git",
       "Fedora: sudo dnf install git",
+      "Arch Linux: sudo pacman -S git",
+      "Windows: winget install --id Git.Git -e",
     })
   end
 
@@ -38,6 +40,8 @@ function M.check()
       "macOS: brew install ripgrep",
       "Ubuntu/Debian: sudo apt install ripgrep",
       "Fedora: sudo dnf install ripgrep",
+      "Arch Linux: sudo pacman -S ripgrep",
+      "Windows: winget install --id BurntSushi.ripgrep.MSVC -e",
     })
   end
 
@@ -47,6 +51,8 @@ function M.check()
       "macOS: xcode-select --install",
       "Ubuntu/Debian: sudo apt install build-essential",
       "Fedora: sudo dnf groupinstall 'Development Tools'",
+      "Arch Linux: sudo pacman -S base-devel",
+      "Windows: 安装 Visual Studio Build Tools，并勾选 C++ build tools",
     })
   end
 
@@ -56,6 +62,8 @@ function M.check()
       "macOS: brew install tree-sitter-cli",
       "Ubuntu/Debian: sudo apt install tree-sitter-cli",
       "Fedora: sudo dnf install tree-sitter-cli",
+      "Arch Linux: sudo pacman -S tree-sitter-cli",
+      "Windows: npm install -g tree-sitter-cli",
     })
   end
 
