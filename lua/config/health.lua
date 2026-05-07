@@ -11,15 +11,6 @@ local function notify_missing(title, lines)
   end)
 end
 
-local function has_any(names)
-  for _, name in ipairs(names) do
-    if executable(name) then
-      return true
-    end
-  end
-  return false
-end
-
 function M.check()
   local system = uv.os_uname().sysname
 
@@ -45,27 +36,8 @@ function M.check()
     })
   end
 
-  if not has_any({ "cc", "gcc", "clang", "zig" }) then
-    notify_missing("缺少 C 编译器", {
-      "Treesitter 安装语法解析器时通常需要编译器。",
-      "macOS: xcode-select --install",
-      "Ubuntu/Debian: sudo apt install build-essential",
-      "Fedora: sudo dnf groupinstall 'Development Tools'",
-      "Arch Linux: sudo pacman -S base-devel",
-      "Windows: 安装 Visual Studio Build Tools，并勾选 C++ build tools",
-    })
-  end
-
-  if not executable("tree-sitter") then
-    notify_missing("缺少 tree-sitter CLI", {
-      "新版 nvim-treesitter 需要 tree-sitter CLI 来安装/更新语法解析器。",
-      "macOS: brew install tree-sitter-cli",
-      "Ubuntu/Debian: sudo apt install tree-sitter-cli",
-      "Fedora: sudo dnf install tree-sitter-cli",
-      "Arch Linux: sudo pacman -S tree-sitter-cli",
-      "Windows: npm install -g tree-sitter-cli",
-    })
-  end
+  -- C 编译器和 tree-sitter CLI 只在安装/更新原生插件或 parser 时才需要。
+  -- 为了平时启动不打扰，这两个依赖放到真正 build 时再提示。
 
   if system == "Linux" and vim.fn.has("clipboard") == 0 then
     notify_missing("系统剪贴板不可用", {

@@ -73,10 +73,16 @@ Neovim 里的命令一般以 `:` 开头，例如 `:Lazy`、`:Mason`、`:TSInstal
 
 - `git`：安装和更新插件需要。
 - `rg`：Telescope 全文搜索需要。
-- C 编译器：Treesitter 安装语法解析器时常用。
 - Linux 剪贴板工具：终端复制粘贴可能需要 `wl-clipboard` 或 `xclip`。
 
 缺少工具时，Neovim 会给出 macOS、Ubuntu/Debian、Fedora 的安装提示。
+
+C 编译器和 `tree-sitter` CLI 只在安装/更新原生插件或 Treesitter parser 时才检查，平时启动不会打扰。需要 C 编译器时会按顺序尝试：
+
+1. `zig cc`
+2. `gcc`
+
+如果两者都不可用，会在真正构建插件时提示安装命令。
 
 ## Treesitter
 
@@ -89,6 +95,7 @@ brew install tree-sitter-cli
 ```
 
 Linux 发行版里一般叫 `tree-sitter-cli`。缺少时启动后会提示安装命令。
+为了保持启动流畅，`tree-sitter` 和 C 编译器只会在你运行 `:Lazy build nvim-treesitter`、`:Lazy sync` 等真正需要构建 parser 的时候检查。
 
 高亮启用方式使用 Neovim 原生 `vim.treesitter.start()`；临时脚本、Scratch 代码 buffer 会优先按 filetype 启用，高亮缺失时再按文件后缀推断，例如 `.sh` 使用 bash parser、`.lua` 使用 lua parser。启动页、插件面板、Telescope 预览窗口和超大文件会自动跳过，避免工具窗口触发 parser 报错。
 

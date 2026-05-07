@@ -786,9 +786,26 @@ return {
     branch = "main",
     lazy = false,
     build = function()
-      if vim.fn.executable("tree-sitter") == 1 then
-        require("nvim-treesitter").install(parsers):wait(300000)
+      if vim.fn.executable("tree-sitter") == 0 then
+        vim.schedule(function()
+          vim.notify(
+            table.concat({
+              "安装或更新 Treesitter parser 需要 tree-sitter CLI。",
+              "macOS: brew install tree-sitter-cli",
+              "Ubuntu/Debian: sudo apt install tree-sitter-cli",
+              "Fedora: sudo dnf install tree-sitter-cli",
+              "Windows: npm install -g tree-sitter-cli",
+            }, "\n"),
+            vim.log.levels.WARN,
+            { title = "缺少 tree-sitter CLI" }
+          )
+        end)
+        return
       end
+
+      require("config.compiler").with_compiler("nvim-treesitter parser 安装", function()
+        require("nvim-treesitter").install(parsers):wait(300000)
+      end)
     end,
     opts = {
       ensure_installed = parsers,

@@ -28,10 +28,9 @@ return {
       "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        -- 没有 make 时跳过原生加速扩展，Telescope 本体仍然可以使用。
-        cond = function()
-          return vim.fn.executable("make") == 1
+        build = function(plugin)
+          -- fzf-native 是 C 扩展，真正构建它时才检查编译器，平时启动不提示。
+          require("config.compiler").make(plugin, "telescope-fzf-native.nvim")
         end,
       },
     },

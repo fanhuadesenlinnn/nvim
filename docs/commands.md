@@ -33,6 +33,31 @@ brew install tree-sitter-cli
 
 Linux 里通常安装系统包 `tree-sitter-cli`，不同发行版包名可能略有差异。
 
+安装或更新 parser 时，如果需要 C 编译器，配置会自动按顺序尝试：
+
+1. `zig cc`
+2. `gcc`
+
+两者都不可用时，才会在当前 build/install 操作里提示安装命令；平时打开 Neovim 不会因为缺少编译器而弹提示。
+
+常见安装方式：
+
+```sh
+# macOS
+brew install zig
+# 或
+brew install gcc
+
+# Ubuntu/Debian
+sudo apt install zig gcc
+
+# Fedora
+sudo dnf install zig gcc
+
+# Arch
+sudo pacman -S zig gcc
+```
+
 ## LSP 和外部工具
 
 | 命令 | 什么时候用 | 说明 |
