@@ -19,3 +19,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+-- 当窗口重新获得焦点、切换 buffer 或短暂停顿时，检查文件是否被外部程序修改。
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  group = group,
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  group = group,
+  callback = function(event)
+    vim.notify(vim.fn.fnamemodify(event.file, ":t") .. " 已从磁盘重新加载", vim.log.levels.INFO)
+  end,
+})

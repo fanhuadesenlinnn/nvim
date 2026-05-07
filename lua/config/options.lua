@@ -39,6 +39,8 @@ opt.completeopt = "menu,menuone,noselect"
 opt.undofile = true
 opt.swapfile = false
 opt.backup = false
+-- 文件被外部程序修改后，Neovim 检测到时自动重新读取未改动的 buffer。
+opt.autoread = true
 
 -- 显示不可见字符，方便发现行尾多余空格。
 opt.list = true
