@@ -71,6 +71,7 @@ return {
         { "<leader>f", group = "查找/搜索" },
         { "<leader>g", group = "Git 操作" },
         { "<leader>l", group = "Lazy/LSP 工具" },
+        { "<leader>m", group = "Markdown" },
         { "<leader>s", group = "分屏操作" },
         { "<leader>t", group = "终端" },
         { "<leader>u", group = "界面/撤销/工具开关" },

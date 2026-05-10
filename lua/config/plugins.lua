@@ -28,6 +28,8 @@ return {
   { import = "plugins.lsp" },
   -- 语法：更准确的高亮和缩进。
   { import = "plugins.treesitter" },
+  -- Markdown：内嵌渲染和浏览器实时预览。
+  { import = "plugins.markdown" },
   -- 界面：启动页、快捷键提示、状态栏。
   { import = "plugins.ui" },
 }
