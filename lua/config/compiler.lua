@@ -64,12 +64,42 @@ local function ensure_zig_wrappers()
 
     write_file(dir .. "/" .. cc_name, {
       "@echo off",
-      "zig cc -target x86_64-windows-gnu %*",
+      "setlocal enabledelayedexpansion",
+      "set \"args=\"",
+      ":loop",
+      "if \"%~1\"==\"\" goto run",
+      "set \"arg=%~1\"",
+      "if \"!arg!\"==\"--target=x86_64-pc-windows-msvc\" set \"arg=--target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"--target=x86_64-pc-windows-gnu\" set \"arg=--target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"-target=x86_64-pc-windows-msvc\" set \"arg=-target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"-target=x86_64-pc-windows-gnu\" set \"arg=-target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"x86_64-pc-windows-msvc\" set \"arg=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"x86_64-pc-windows-gnu\" set \"arg=x86_64-windows-gnu\"",
+      "set \"args=!args! \"!arg!\"\"",
+      "shift",
+      "goto loop",
+      ":run",
+      "zig cc !args!",
     })
 
     write_file(dir .. "/" .. cxx_name, {
       "@echo off",
-      "zig c++ -target x86_64-windows-gnu %*",
+      "setlocal enabledelayedexpansion",
+      "set \"args=\"",
+      ":loop",
+      "if \"%~1\"==\"\" goto run",
+      "set \"arg=%~1\"",
+      "if \"!arg!\"==\"--target=x86_64-pc-windows-msvc\" set \"arg=--target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"--target=x86_64-pc-windows-gnu\" set \"arg=--target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"-target=x86_64-pc-windows-msvc\" set \"arg=-target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"-target=x86_64-pc-windows-gnu\" set \"arg=-target=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"x86_64-pc-windows-msvc\" set \"arg=x86_64-windows-gnu\"",
+      "if \"!arg!\"==\"x86_64-pc-windows-gnu\" set \"arg=x86_64-windows-gnu\"",
+      "set \"args=!args! \"!arg!\"\"",
+      "shift",
+      "goto loop",
+      ":run",
+      "zig c++ !args!",
     })
 
     return {
@@ -118,26 +148,37 @@ local function install_lines()
 
   if system == "Darwin" then
     return {
-      "需要 C 编译器时会优先使用 zig cc，其次使用 gcc。",
-      "macOS 推荐安装 Zig:",
-      "  brew install zig",
-      "或者安装 GCC:",
+      "需要 C 编译器时会优先使用 gcc，其次使用 zig cc。",
+      "macOS 推荐安装 GCC:",
       "  brew install gcc",
+      "或者安装 Zig:",
+      "  brew install zig",
     }
   end
 
   return {
-    "需要 C 编译器时会优先使用 zig cc，其次使用 gcc。",
+    "需要 C 编译器时会优先使用 gcc，其次使用 zig cc。",
     "Ubuntu/Debian:",
-    "  sudo apt install zig gcc",
+    "  sudo apt install gcc",
     "Fedora:",
-    "  sudo dnf install zig gcc",
+    "  sudo dnf install gcc",
     "Arch:",
-    "  sudo pacman -S zig gcc",
+    "  sudo pacman -S gcc",
+    "如果不想安装 GCC，也可以安装 Zig 作为备用编译器。",
   }
 end
 
-function M.resolve()
+local function resolve_gcc()
+  if executable("gcc") then
+    return {
+      label = "gcc",
+      cc = "gcc",
+      cxx = "g++",
+    }
+  end
+end
+
+local function resolve_zig()
   if executable("zig") then
     local wrappers = ensure_zig_wrappers()
 
@@ -148,16 +189,14 @@ function M.resolve()
       path_dir = wrappers.dir,
     }
   end
+end
 
-  if executable("gcc") then
-    return {
-      label = "gcc",
-      cc = "gcc",
-      cxx = "g++",
-    }
+function M.resolve()
+  if system_name() == "Windows_NT" then
+    return resolve_zig() or resolve_gcc()
   end
 
-  return nil
+  return resolve_gcc() or resolve_zig()
 end
 
 function M.notify_missing(context)

@@ -778,6 +778,131 @@ local function set_indentexpr(buf)
   vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end
 
+local function complete_available_parsers(arglead)
+  return vim.tbl_filter(function(parser)
+    return parser:find(arglead) ~= nil
+  end, require("nvim-treesitter.config").get_available())
+end
+
+local function complete_installed_parsers(arglead)
+  return vim.tbl_filter(function(parser)
+    return parser:find(arglead) ~= nil
+  end, require("nvim-treesitter.config").get_installed())
+end
+
+local function wait_for_treesitter_task(task)
+  if type(task) == "table" and type(task.wait) == "function" then
+    return task:wait(300000)
+  end
+
+  return task
+end
+
+local function language_list_contains(languages, lang)
+  if type(languages) == "string" then
+    return languages == lang or languages == "all"
+  end
+
+  if type(languages) ~= "table" then
+    return false
+  end
+
+  if #languages == 0 then
+    return true
+  end
+
+  for _, item in ipairs(languages) do
+    if item == lang or item == "all" then
+      return true
+    end
+  end
+
+  return false
+end
+
+local function append_env_flag(name, flag)
+  local old_value = vim.env[name]
+  local current = old_value or ""
+
+  if not current:find(flag, 1, true) then
+    vim.env[name] = current == "" and flag or (current .. " " .. flag)
+  end
+
+  return function()
+    vim.env[name] = old_value
+  end
+end
+
+local function with_parser_build_env(languages, callback)
+  if not language_list_contains(languages, "just") then
+    return callback()
+  end
+
+  local restore_cflags = append_env_flag("CFLAGS", "-UNDEBUG")
+  local restore_cxxflags = append_env_flag("CXXFLAGS", "-UNDEBUG")
+  local ok, result = pcall(callback)
+
+  restore_cflags()
+  restore_cxxflags()
+
+  if not ok then
+    error(result)
+  end
+
+  return result
+end
+
+local function run_treesitter_install(context, languages, callback)
+  return require("config.compiler").with_compiler(context, function()
+    return with_parser_build_env(languages, function()
+      return wait_for_treesitter_task(callback())
+    end)
+  end)
+end
+
+local function setup_treesitter_commands()
+  local install = require("nvim-treesitter.install")
+
+  vim.api.nvim_create_user_command("TSInstall", function(args)
+    run_treesitter_install("nvim-treesitter parser 安装", args.fargs, function()
+      return install.install(args.fargs, { force = args.bang, summary = true })
+    end)
+  end, {
+    nargs = "+",
+    bang = true,
+    bar = true,
+    complete = complete_available_parsers,
+    desc = "Install treesitter parsers",
+  })
+
+  vim.api.nvim_create_user_command("TSInstallFromGrammar", function(args)
+    run_treesitter_install("nvim-treesitter parser 生成安装", args.fargs, function()
+      return install.install(args.fargs, {
+        generate = true,
+        summary = true,
+        force = args.bang,
+      })
+    end)
+  end, {
+    nargs = "+",
+    bang = true,
+    bar = true,
+    complete = complete_available_parsers,
+    desc = "Install treesitter parsers from grammar",
+  })
+
+  vim.api.nvim_create_user_command("TSUpdate", function(args)
+    run_treesitter_install("nvim-treesitter parser 更新", args.fargs, function()
+      return install.update(args.fargs, { summary = true })
+    end)
+  end, {
+    nargs = "*",
+    bar = true,
+    complete = complete_installed_parsers,
+    desc = "Update installed treesitter parsers",
+  })
+end
+
 return {
   {
     -- nvim-treesitter 的 main 分支是 Neovim 0.12+ 的新版实现。
@@ -803,7 +928,7 @@ return {
         return
       end
 
-      require("config.compiler").with_compiler("nvim-treesitter parser 安装", function()
+      run_treesitter_install("nvim-treesitter parser 安装", parsers, function()
         require("nvim-treesitter").install(parsers):wait(300000)
       end)
     end,
@@ -817,6 +942,8 @@ return {
       treesitter.setup({
         install_dir = opts.install_dir,
       })
+
+      setup_treesitter_commands()
 
       for filetype, lang in pairs(lang_by_filetype) do
         pcall(vim.treesitter.language.register, lang, filetype)
